@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" charset="utf-8"></script>
+  <script type="text/babel">
+    // React is loaded and is available as React and ReactDOM
+    // imports should NOT be used
+
+    const { useState } = React;
+
+    const data = ["A", "B", "C"];
+
+    const List = (props) => {
+
+      const [items, updateItems] = useState(props.data)
+
+      console.log("items", items);
+
+      const handleClick = (items, item, updateItems) => {
+        const filteredItem = items.filter((el) => el === item)
+        const filteredArray = items.filter((el) => el !== item)
+        updateItems(filteredItem.concat(filteredArray))
+      }
+
+      return (
+        <ul>
+          {items.map((item, index, items) =>
+            <li
+              key={index}
+              onClick={() => { handleClick(items, item, updateItems) }}>
+              {item}
+            </li>)}
+        </ul>
+      );
+    }
+
+    document.body.innerHTML = "<div id='root'> </div>";
+
+    const rootElement = document.getElementById("root");
+    ReactDOM.render(<List data={data} />, rootElement);
+
+  </script>
+  <div id="root"></div>
+</body>
+
+</html>
