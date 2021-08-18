@@ -17,8 +17,6 @@
 
       const [items, updateItems] = useState(props.data)
 
-      console.log("items", items);
-
       const handleClick = (items, item, updateItems) => {
         const filteredItem = items.filter((el) => el === item)
         const filteredArray = items.filter((el) => el !== item)
